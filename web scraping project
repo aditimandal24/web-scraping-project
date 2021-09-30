@@ -1,33 +1,20 @@
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    
-    'core'
-]
-
-#Static
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-
-
-# Auth
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend'
-)
-SITE_ID = 1
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+data = []
+data1= []
+import csv
+from urllib.request import urlopen, HTTPError
+from datetime import datetime, timedelta
+for pg in s:
+    # query the website and return the html to the variable 'page'
+    page = urllib.request.urlopen(pg)
+    try:
+        search_response = urllib.request.urlopen(pg)
+    except urllib.request.HTTPError:
+        pass
+    # parse the html using beautiful soap and store in variable `soup`
+    soup = BeautifulSoup(page, 'html.parser')
+    # Take out the <div> of name and get its value
+    ls = [x.get_text(strip=True) for x in soup.find_all("h2", {"class": "f18"})]
+    ls1=  [x.get_text(strip=True) for x in soup.find_all("span", {"class": "date"})]
+    # save the data in tuple
+    data.append((ls))
+    data1.append(ls1)
